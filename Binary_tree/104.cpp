@@ -11,11 +11,19 @@
  */
 class Solution {
 public:
+    int dep = 0;
+    int max_dep = 0;
     int maxDepth(TreeNode* root) {
-        if(root == NULL) return 0;
-        int left = maxDepth(root->left);
-        int right = maxDepth(root->right);
-        int res = max(left, right)+1;
-        return res;
+        traverse(root);
+        return max_dep;
+    }
+    void traverse(TreeNode* root)
+    {
+        if(root == nullptr) return;
+        dep++;
+        traverse(root->left);
+        if(max_dep <= dep) max_dep = dep;
+        traverse(root->right);
+        dep--;
     }
 };
